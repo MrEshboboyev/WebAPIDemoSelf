@@ -4,31 +4,30 @@ var builder = WebApplication.CreateBuilder(args);
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-
-app.UseHttpsRedirection();
-
-var summaries = new[]
+// product
+app.MapGet("/products", () =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+    return "Getting all products!";
+});
 
-app.MapGet("/weatherforecast", () =>
+app.MapGet("/products/{id}", (int id) =>
 {
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+    return $"Getting product with ID : {id}";
+});
+
+app.MapPost("/products", () =>
+{
+    return "Create product!";
+});
+
+app.MapPut("/products/{id}", (int id) =>
+{
+    return $"Updating product with ID : {id}";
+});
+
+app.MapDelete("/products/{id}", (int id) =>
+{
+    return $"Delete product with ID : {id}";
 });
 
 app.Run();
-
-internal record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
