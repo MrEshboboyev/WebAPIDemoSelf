@@ -14,9 +14,10 @@ namespace WebAPIDemoSelf.Controllers
         }
 
         [HttpGet("{id}")]
-        public string GetProductById(int id)
+        // Route link : https://localhost:7112/api/products/4?color=black
+        public string GetProductById(int id, [FromQuery] string color)
         {
-            return $"Getting product with ID : {id}";
+            return $"Getting product with ID : {id}; Color : {color}";
         }
 
         [HttpPost]
