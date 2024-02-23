@@ -21,8 +21,9 @@ namespace WebAPIDemoSelf.Controllers
         }
 
         [HttpPost]
-        // Postman : Body(Json)
-        public string CreateProduct([FromBody] Shirt shirt)
+        // Postman [FromBody] : Body(Json)
+        // Postman [FromForm] : Body(form-data)
+        public string CreateProduct([FromForm] Shirt shirt)
         {
             return "Create product.";
         }
