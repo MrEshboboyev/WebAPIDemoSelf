@@ -6,16 +6,16 @@ namespace WebAPIDemoSelf.Models.Validations
     {
         protected override ValidationResult? IsValid(object? value, ValidationContext validationContext)
         {
-            var shirt = validationContext.ObjectInstance as Shirt;
+            var product = validationContext.ObjectInstance as Product;
 
-            if(shirt != null && !string.IsNullOrWhiteSpace(shirt.Gender))
+            if(product != null && !string.IsNullOrWhiteSpace(product.Gender))
             {
-                if(shirt.Gender.Equals("men", StringComparison.OrdinalIgnoreCase) && shirt.Size < 8)
+                if(product.Gender.Equals("men", StringComparison.OrdinalIgnoreCase) && product.Size < 8)
                 {
                     return new ValidationResult("For men's products, the size has to be greater or equal to 8");
                 }
                 
-                else if(shirt.Gender.Equals("women", StringComparison.OrdinalIgnoreCase) && shirt.Size < 6)
+                else if(product.Gender.Equals("women", StringComparison.OrdinalIgnoreCase) && product.Size < 6)
                 {
                     return new ValidationResult("For women's products, the size has to be greater or equal to 6");
                 }

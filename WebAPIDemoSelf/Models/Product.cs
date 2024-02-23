@@ -3,9 +3,9 @@ using WebAPIDemoSelf.Models.Validations;
 
 namespace WebAPIDemoSelf.Models
 {
-    public class Shirt
+    public class Product
     {
-        public int ShirtId { get; set; }
+        public int ProductId { get; set; }
         [Required]
         public string? Brand { get; set; }
         [Required]
