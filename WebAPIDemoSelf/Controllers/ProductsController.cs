@@ -23,7 +23,7 @@ namespace WebAPIDemoSelf.Controllers
         [HttpPost]
         // Postman [FromBody] : Body(Json)
         // Postman [FromForm] : Body(form-data)
-        public string CreateProduct([FromForm] Shirt shirt)
+        public string CreateProduct([FromBody] Shirt shirt)
         {
             return "Create product.";
         }
