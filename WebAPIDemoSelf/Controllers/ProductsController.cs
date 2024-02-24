@@ -33,15 +33,9 @@ namespace WebAPIDemoSelf.Controllers
         [HttpPost]
         // Postman [FromBody] : Body(Json)
         // Postman [FromForm] : Body(form-data)
+        [Product_ValidateCreateProductFilter]
         public IActionResult CreateProduct([FromBody] Product product)
         {
-            if(product == null)
-                return BadRequest();
-
-            var existingProduct = ProductRepository.GetProductByProperties(product.Brand, product.Color, product.Gender, product.Size);
-            if(existingProduct != null)
-                return BadRequest();
-
             ProductRepository.AddProduct(product);
 
             return CreatedAtAction(nameof(GetProductById),
