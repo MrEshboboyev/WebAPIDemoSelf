@@ -13,7 +13,7 @@ namespace WebAPIDemoSelf.Controllers
         [HttpGet]
         public IActionResult GetProducts()
         {
-            return Ok("Getting all products!");
+            return Ok(ProductRepository.GetProducts());
         }
 
         [HttpGet("{productId}")]
@@ -35,7 +35,18 @@ namespace WebAPIDemoSelf.Controllers
         // Postman [FromForm] : Body(form-data)
         public IActionResult CreateProduct([FromBody] Product product)
         {
-            return Ok("Create product.");
+            if(product == null)
+                return BadRequest();
+
+            var existingProduct = ProductRepository.GetProductByProperties(product.Brand, product.Color, product.Gender, product.Size);
+            if(existingProduct != null)
+                return BadRequest();
+
+            ProductRepository.AddProduct(product);
+
+            return CreatedAtAction(nameof(GetProductById),
+                new { productId = product.ProductId},
+                product);
         }
 
         [HttpPut("{id}")]

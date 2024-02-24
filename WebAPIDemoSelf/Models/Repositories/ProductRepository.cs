@@ -17,6 +17,11 @@
             new Product { ProductId = 10, Brand = "Vans", Color = "Pink", Size = 10, Gender = "Women", Price = 29.99 }
         };
 
+        public static List<Product> GetProducts() 
+        { 
+            return products; 
+        }
+
         public static bool ProductExists(int id)
         {
             return products.Any(p => p.ProductId == id);
@@ -25,6 +30,33 @@
         public static Product? GetProductById(int id)
         {
             return products.FirstOrDefault(p => p.ProductId == id);
+        }
+
+        // get Product by properties
+        public static Product? GetProductByProperties(string? brand, string? color, string? gender, int? size)
+        {
+            return products.FirstOrDefault(p =>
+            !string.IsNullOrWhiteSpace(brand) &&
+            !string.IsNullOrWhiteSpace(p.Brand) &&
+            p.Brand.Equals(brand, StringComparison.OrdinalIgnoreCase) &&
+            !string.IsNullOrWhiteSpace(color) &&
+            !string.IsNullOrWhiteSpace(p.Color) &&
+            p.Color.Equals(color, StringComparison.OrdinalIgnoreCase) &&
+            !string.IsNullOrWhiteSpace(gender) &&
+            !string.IsNullOrWhiteSpace(p.Gender) &&
+            p.Gender.Equals(gender, StringComparison.OrdinalIgnoreCase) &&
+            size.HasValue &&
+            p.Size.HasValue &&
+            p.Size.Value == size.Value);
+        }
+
+        // add product
+        public static void AddProduct(Product product)
+        {
+            int maxId = products.Max(p => p.ProductId);
+            product.ProductId = maxId + 1;
+
+            products.Add(product);
         }
     }
 }
