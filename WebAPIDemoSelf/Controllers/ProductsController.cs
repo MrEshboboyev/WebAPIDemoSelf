@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebAPIDemoSelf.Filters;
 using WebAPIDemoSelf.Models;
 using WebAPIDemoSelf.Models.Repositories;
 
@@ -16,6 +17,7 @@ namespace WebAPIDemoSelf.Controllers
         }
 
         [HttpGet("{productId}")]
+        [Product_ValidateProductIdFilter]
         public IActionResult GetProductById(int productId)
         {
             if (productId <= 0)
